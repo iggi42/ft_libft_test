@@ -1,2 +1,5 @@
 *.o
 libft_tester
+/bin/
+*.gcda
+*.gcno

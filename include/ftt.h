@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ftlib_test.c                                       :+:      :+:    :+:   */
+/*   ftlib_test.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkruger <fkruger@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 18:54:17 by fkruger           #+#    #+#             */
-/*   Updated: 2025/10/06 23:04:51 by fkruger          ###   ########.fr       */
+/*   Created: 2025/10/06 22:57:31 by fkruger           #+#    #+#             */
+/*   Updated: 2025/10/06 23:00:54 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#ifndef FTT_LIB_H
+#define FTT_LIB_H
+#include <stdlib.h>
 
-#include "./ftlib_test.h"
-#include <stdio.h>
+void *ftt_malloc(size_t s);
 
-int	main(void)
-{
-	printf("hello world");
-	return(1);
-}
+#endif
