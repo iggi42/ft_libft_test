@@ -73,6 +73,3 @@ Test(libft_strrchr, strrchr_0_found)
 	char *result = ft_strrchr(s, c);
 	cr_assert_eq(result, &s[4], "%p + 4 != %p", result, &result[4]);
 }
-
-
-
