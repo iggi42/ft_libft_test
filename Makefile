@@ -1,9 +1,10 @@
 CC = cc
 CFLAGS += -Wall -Wextra -Werror -g -fprofile-arcs -ftest-coverage
 # before an include!
-NAME = $(shell basename $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST)))))
+NAME = libft_test
+# $(shell basename $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST)))))
 C_SRC = ftt_utils.c ftt_lib_ctype.c ftt_lib_str.c ftt_lib_mem.c
-LIBFT_DIR = ../libft
+LIBFT_DIR = ../main
 LIBFT = $(LIBFT_DIR)/libft.a
 VALGRIND = valgrind -q --trace-children=yes
 
@@ -21,7 +22,7 @@ fclean: clean
 	(cd $(LIBFT_DIR) && $(MAKE) fclean)
 
 clean:
-	rm -f $(OBJ) bin/$(NAME)
+	rm -f $(BIN_DIR)/*
 
 re: fclean all
 
