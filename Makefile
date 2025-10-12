@@ -1,5 +1,6 @@
 CC = cc
-CFLAGS += -Wall -Wextra -Werror -g -fprofile-arcs -ftest-coverage
+CFLAGS += -Wall -Wextra -Werror -g
+# -fprofile-arcs -ftest-coverage
 # before an include!
 NAME = libft_test
 # $(shell basename $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST)))))

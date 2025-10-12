@@ -94,6 +94,13 @@ Test(libft_mem, calloc_empty)
 	free(target);
 }
 
+Test(libft_mem, calloc_empty2)
+{
+	int *target = (int *) ft_calloc(1, 0);
+
+	free(target);
+}
+
 Test(libft_mem, memmove_easy)
 {
 	// TODO
