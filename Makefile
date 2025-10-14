@@ -13,10 +13,11 @@ C_DIR = ./src
 BIN_DIR = ./bin
 OBJ = $(C_SRC:%.c=$(BIN_DIR)/%.o)
 
-.PHONY: fclean clean re all test run
+.PHONY: fclean clean re all test run $(LIBFT)
 
 
 $(NAME): bin/$(NAME)
+pg: bin/pg
 all: $(NAME)
 
 fclean: clean
@@ -33,9 +34,15 @@ $(LIBFT):
 bin/$(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) -lcriterion -o $@ $(OBJ) $(LIBFT)
 
-run: bin/$(NAME)
+$(BIN_DIR)/pg: src/ftt_utils.c src/pg.c $(LIBFT)
+	$(CC) $(CFLAGS) src/ftt_utils.c src/pg.c -I$(LIBFT_DIR) -o $(BIN_DIR)/pg $(LIBFT)
+
+test: bin/$(NAME)
 	$(VALGRIND) ./bin/$(NAME)
 
-bin/%.o: src/%.c $(LIBFT_DIR)/libft.h
+$(BIN_DIR):
+	mkdir $(BIN_DIR)
+
+$(BIN_DIR)/%.o: src/%.c $(LIBFT_DIR)/libft.h $(BIN_DIR)
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
 

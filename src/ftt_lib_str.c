@@ -28,14 +28,14 @@ Test(libft_str, strlen_easy)
 	cr_expect_eq(ft_strlen(input), strlen(input));
 }
 
-Test(libft_strchr, strchr_easy)
+Test(libft_str, strchr_easy)
 {
 	int c = 'x';
 	char *s = "examn_abcd";
 	cr_assert_eq(ft_strchr(s, c), &s[1]);
 }
 
-Test(libft_strchr, strchr_not_found)
+Test(libft_str, strchr_not_found)
 {
 	int c = '?';
 	char *s = "examn_abcd";
@@ -43,7 +43,7 @@ Test(libft_strchr, strchr_not_found)
 	cr_assert_eq(result, NULL, "%p is not NULL, but %x :c", result, *result);
 }
 
-Test(libft_strchr, strchr_0_found)
+Test(libft_str, strchr_0_found)
 {
 	int c = '\0';
 	char *s = "1234";
@@ -51,14 +51,14 @@ Test(libft_strchr, strchr_0_found)
 	cr_assert_eq(result, &s[4], "%p + 4 != %p", result, &result[4]);
 }
 
-Test(libft_strrchr, strrchr_easy)
+Test(libft_str, strrchr_easy)
 {
 	int c = 'x';
 	char *s = "examn_abcd";
 	cr_assert_eq(ft_strrchr(s, c), &s[1]);
 }
 
-Test(libft_strrchr, strrchr_not_found)
+Test(libft_str, strrchr_not_found)
 {
 	int c = '?';
 	char *s = "examn_abcd";
@@ -66,10 +66,25 @@ Test(libft_strrchr, strrchr_not_found)
 	cr_assert_eq(result, NULL, "%p is not NULL, but %x :c", result, *result);
 }
 
-Test(libft_strrchr, strrchr_0_found)
+Test(libft_str, strrchr_0_found)
 {
 	int c = '\0';
 	char *s = "1234";
 	char *result = ft_strrchr(s, c);
 	cr_assert_eq(result, &s[4], "%p + 4 != %p", result, &result[4]);
+}
+
+Test(libft_str, strlcpy_easy)
+{
+	char *src = "12345678";
+	char *dest = (char *) ftt_malloc(20 * sizeof(char));
+	ft_strlcpy(dest, src, 10);
+	cr_assert_eq(strcmp(src, dest), 0);
+}
+
+Test(libft_str, strlcpy_smol_dest)
+{
+	char *src = "123456789";
+	char *dest = (char *) ftt_malloc(2 * sizeof(char));
+	cr_assert_eq(ft_strlcpy(dest, src, 2), 10);
 }

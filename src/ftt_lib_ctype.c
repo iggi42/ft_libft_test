@@ -16,11 +16,12 @@
 #include <libft.h>
 
 #define EOF_Test(target) Test(libft_ctype, target) { cr_assert(target(EOF) == 0); }
-EOF_Test(ft_isalpha)
-EOF_Test(ft_isdigit)
-EOF_Test(ft_isalnum)
-EOF_Test(ft_isascii)
-EOF_Test(ft_isprint)
+
+EOF_Test(ft_isalpha);
+EOF_Test(ft_isdigit);
+EOF_Test(ft_isalnum);
+EOF_Test(ft_isascii);
+EOF_Test(ft_isprint);
 
 Test(libft_ctype, ctype_positive)
 {

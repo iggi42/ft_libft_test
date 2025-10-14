@@ -101,6 +101,37 @@ Test(libft_mem, calloc_empty2)
 	free(target);
 }
 
+Test(libft_mem, memcmp_eq)
+{
+	int a1[] = {1, 2, 3};
+	int a2[] = {1, 2, 3};
+  int result = ft_memcmp(a1, a2, 3);
+	cr_assert_eq(result, 0, "0 should be equal, but is %d", result);
+}
+
+Test(libft_mem, memcmp_lower)
+{
+	char a1[] = {1, 2, 3, 4};
+	char a2[] = {1, 2, 100, 4};
+  int result = ft_memcmp(a1, a2, 4 * sizeof(char));
+  cr_assert_lt(result, 0, "result be negative, but is '%d'", result);
+}
+
+Test(libft_mem, memcmp_higher)
+{
+	char a1[] = {1, 2, 3, 4};
+	char a2[] = {1, 2, 1, 4};
+  int result = ft_memcmp(a1, a2, 4 * sizeof(char));
+  cr_assert_gt(result, 0, "result be positive, but is '%d'", result);
+}
+
+Test(libft_mem, memchr_easy)
+{
+	char a[] = {'a', 'b', 'c'};
+	void *result = ft_memchr(a, 'a', 3);
+	cr_assert_eq(a, result);
+}
+
 Test(libft_mem, memmove_easy)
 {
 	// TODO
