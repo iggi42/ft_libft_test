@@ -4,7 +4,7 @@ CFLAGS += -Wall -Wextra -Werror -g
 # before an include!
 NAME = libft_test
 # $(shell basename $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST)))))
-C_SRC = ftt_utils.c ftt_lib_ctype.c ftt_lib_str.c ftt_lib_mem.c
+C_SRC = ftt_utils.c ftt_lib_ctype.c ftt_lib_str.c ftt_lib_str2.c ftt_lib_mem.c 
 LIBFT_DIR = ../main
 LIBFT = $(LIBFT_DIR)/libft.a
 VALGRIND = valgrind -q --trace-children=yes
@@ -35,11 +35,13 @@ bin/$(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) -lcriterion -o $@ $(OBJ) $(LIBFT)
 
 $(BIN_DIR)/pg: src/ftt_utils.c src/pg.c $(LIBFT)
-	$(CC) $(CFLAGS) src/ftt_utils.c src/pg.c -I$(LIBFT_DIR) -o $(BIN_DIR)/pg $(LIBFT)
+	$(CC) $(CFLAGS) src/ftt_utils.c src/pg.c -I$(LIBFT_DIR) -lbsd -o $(BIN_DIR)/pg $(LIBFT)
 
 test: bin/$(NAME)
-	$(VALGRIND) ./bin/$(NAME)
+	./bin/$(NAME)
 
+test_leaks: bin/$(NAME)
+	$(VALGRIND) ./bin/$(NAME)
 $(BIN_DIR):
 	mkdir $(BIN_DIR)
 

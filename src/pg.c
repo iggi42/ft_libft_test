@@ -1,10 +1,11 @@
 #include <libft.h>
 #include <stdio.h>
+#include <unistd.h>
 
 int main(void)
 {
-	int a1[] = {0, 2, 0};
-	int a2[] = {0, 2, 3};
-  int result = ft_memcmp(a1, a2, 3 * sizeof(int));
-	printf("result: %d\n", result);
+	const char *haystack = "a23";
+	const char *needle = "2";
+
+	printf("penis %p %p\n",  needle + 1, ft_strnstr(haystack, needle, 4)	);
 }
