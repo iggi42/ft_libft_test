@@ -1,5 +1,5 @@
-
 #include "../include/ftt.h"
+#include "criterion/assert.h"
 #include <criterion/criterion.h>
 #include <criterion/internal/assert.h>
 #include <stdio.h>
@@ -9,11 +9,57 @@
 
 #define T(a) Test(libft_str2, a)
 
-
-// TODO check if the string is actually max len (3 in this)
 T(substr_easy)
 {
- char *base = "12345678";
- char *result = ft_substr(base, 0, 3);
- cr_assert_eq(strncmp("123", result, 4), 0);
+ const char *base = "12345678";
+ const char *result = ft_substr(base, 0, 3);
+ cr_assert_eq(strncmp("123", result, 4), 0, "\"%s\" is not \"123\"", result);
+ cr_assert_eq(strlen(result), 3);
 }
+
+T(substr_size_too_large)
+{
+ const char *base = "1";
+ const char *result = ft_substr(base, 0, 3);
+ cr_assert_eq(strncmp("1", result, 3), 0, "\"%s\" is not \"1\"", result);
+ cr_assert_eq(strlen(result), 1);
+}
+
+T(substr_start_too_large)
+{
+ const char *base = "";
+ const char *result = ft_substr(base, 1, 3);
+ cr_assert_eq(strncmp("", result, 3), 0, "\"%s\" is not an empty string", result);
+ cr_assert_eq(strlen(result), 0);
+}
+
+T(substr_start_too_large2)
+{
+ const char *base = "zxy abc efg ";
+ const char *result = ft_substr(base, 13, 3);
+ cr_assert_eq(strncmp("", result, 3), 0, "\"%s\" is not an empty string", result);
+ cr_assert_eq(strlen(result), 0);
+}
+
+T(substr_middle)
+{
+ const char *base = "zxy abc efg ";
+ const char *result = ft_substr(base, 4, 3);
+ cr_assert_eq(strncmp("abc", result, 3), 0, "\"%s\" is not an empty string", result);
+ cr_assert_eq(strlen(result), 3);
+}
+	
+T(substr_last_char)
+{
+ const char *base = "abc1";
+ const char *result = ft_substr(base, 3, 3);
+ cr_assert_eq(strncmp("1", result, 3), 0, "\"%s\" the last char of \"%s\" ", result, base);
+ cr_assert_eq(strlen(result), 1);
+}
+
+T(strjoin_easy)
+{
+ const char *base = ft_strjoin("4", "2");
+ cr_assert_str_eq(base, "42");
+}
+ 
