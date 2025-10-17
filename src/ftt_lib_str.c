@@ -18,7 +18,7 @@
 #include <string.h>
 #include <limits.h>
 
-#define T(a) Test(libft2_str2, a)
+#define T(a) Test(libft_str, a)
 
 T(strlen_empty)
 {
@@ -82,7 +82,15 @@ T(strlcpy_easy)
 	char *src = "12345678";
 	char *dest = (char *) ftt_malloc(20 * sizeof(char));
 	ft_strlcpy(dest, src, 10);
-	cr_assert_eq(strcmp(src, dest), 0);
+	cr_assert_str_eq(src, dest);
+}
+
+T(strlcpy_close)
+{
+	char *src = "12345678";
+	char *dest = (char *) ftt_malloc(9 * sizeof(char));
+	ft_strlcpy(dest, src, 9);
+	cr_assert_str_eq(src, dest);
 }
 
 T(strlcpy_smol_dest)
@@ -90,6 +98,26 @@ T(strlcpy_smol_dest)
 	char *src = "123456789";
 	char *dest = (char *) ftt_malloc(2 * sizeof(char));
 	cr_assert_eq(ft_strlcpy(dest, src, 2), 10);
+}
+
+T(strlcat_easy)
+{
+	char *src = "qwertzuiop";
+	char *dest = strdup("abc\0;123456789;123456789");
+  int result = ft_strlcat(dest, src, 14);
+	cr_assert_eq(result , 14, "dest: \"%s\"", dest);
+	cr_assert_str_eq("abcqwertzuiop", dest);
+	cr_assert_eq(strlen("abcqwertzuiop"), 13);
+}
+
+// strlcat with dst buffer too small
+T(strlcat_too_small)
+{
+	char *src = "qwertzuiop";
+	char *dest = strdup("jk\0 234567");
+  int result = ft_strlcat(dest, src, 10);
+	cr_assert_eq(result, 13, "result: %d", result);
+	cr_assert_str_eq("jk", dest, "dest: \"%s\"", dest); // string hasn't changed
 }
 
 T(strnstr_happy)

@@ -45,6 +45,6 @@ test_leaks: bin/$(NAME)
 $(BIN_DIR):
 	mkdir $(BIN_DIR)
 
-$(BIN_DIR)/%.o: src/%.c $(LIBFT_DIR)/libft.h $(BIN_DIR)
+$(BIN_DIR)/%.o: src/%.c $(LIBFT_DIR)/libft.h # $(BIN_DIR)
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
 

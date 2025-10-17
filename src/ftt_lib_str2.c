@@ -63,3 +63,22 @@ T(strjoin_easy)
  cr_assert_str_eq(base, "42");
 }
  
+T(strjoin_empty)
+{
+ const char *base = ft_strjoin("", "");
+ cr_assert_str_eq(base, "");
+}
+
+T(strjoin_smoll)
+{
+ const char *base = ft_strjoin("a", "");
+ cr_assert_str_eq(base, "a");
+}
+
+T(strtrim_easy)
+{
+ const char *set = "0123456789";
+ const char *s1 = "0Eins1Zwei2Drei3Fier4";
+ const char *result = ft_strtrim(s1, set);
+ cr_assert_str_eq("EinsZweiDreiFier", result);
+}

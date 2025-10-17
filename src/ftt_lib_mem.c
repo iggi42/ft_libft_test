@@ -18,6 +18,16 @@
 #include <libft.h>
 #include <string.h>
 
+# define T(a) Test(libft_mem, a)
+
+T(memcpy_easy)
+{
+	int src[] = {13, 341, 859};
+	int *dest = ftt_malloc(sizeof(src));
+	cr_assert_eq(dest, ft_memcpy(dest, src, sizeof(src)));
+	cr_assert_eq(memcmp(src, dest, sizeof(src)), 0, "0 != memcmp(%p, %p, %d)", src, dest, (int) sizeof(src));
+}
+
 Test(libft_mem, bzero_simple)
 {
 	int *target = ftt_malloc(42 * sizeof(int));
