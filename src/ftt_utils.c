@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "../include/ftt.h"
+#include <stdlib.h>
 
 void *ftt_malloc(size_t s)
 {
@@ -24,4 +25,14 @@ void *ftt_malloc(size_t s)
 		i++;
 	}
 	return (result);
+}
+
+
+size_t ftt_array_lenth(const t_byte **start, const size_t el_s)
+{
+	size_t l;
+
+	l = 0;
+	while (*(start + el_s * l) != NULL) l++;
+	return (l);
 }

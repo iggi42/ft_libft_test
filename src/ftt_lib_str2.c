@@ -1,3 +1,4 @@
+#include "criterion/assert.h"
 #include <criterion/criterion.h>
 #include <criterion/internal/assert.h>
 #include <libft.h>
@@ -94,4 +95,12 @@ T(strtrim_empty2)
  const char *s1 = "jkjk";
  const char *result = ft_strtrim(s1, set);
  cr_assert_str_eq("jkjk", result);
+}
+
+
+T(split_easy)
+{
+ const char *input = "01 23 45 67 89";
+ const char **result = ft_split(input, ' ');
+ cr_assert_eq(ftt_array_lenth(m, const size_t el_s))
 }
