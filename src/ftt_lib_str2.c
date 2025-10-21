@@ -1,8 +1,5 @@
-#include "../include/ftt.h"
-#include "criterion/assert.h"
 #include <criterion/criterion.h>
 #include <criterion/internal/assert.h>
-#include <stdio.h>
 #include <libft.h>
 #include <string.h>
 #include <limits.h>
@@ -81,4 +78,20 @@ T(strtrim_easy)
  const char *s1 = "0Eins1Zwei2Drei3Fier4";
  const char *result = ft_strtrim(s1, set);
  cr_assert_str_eq("EinsZweiDreiFier", result);
+}
+
+T(strtrim_empty)
+{
+ const char *set = "0123456789";
+ const char *s1 = "";
+ const char *result = ft_strtrim(s1, set);
+ cr_assert_str_eq("", result);
+}
+
+T(strtrim_empty2)
+{
+ const char *set = "0123456789";
+ const char *s1 = "jkjk";
+ const char *result = ft_strtrim(s1, set);
+ cr_assert_str_eq("jkjk", result);
 }
