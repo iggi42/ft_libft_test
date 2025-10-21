@@ -5,7 +5,7 @@ CFLAGS += -Wall -Wextra -Werror -g
 NAME = libft_test
 # $(shell basename $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST)))))
 C_SRC = ftt_utils.c ftt_lib_ctype.c ftt_lib_str.c ftt_lib_str2.c ftt_lib_mem.c 
-LIBFT_DIR = ../main
+LIBFT_DIR = ../libft
 LIBFT = $(LIBFT_DIR)/libft.a
 VALGRIND = valgrind -q --trace-children=yes
 
@@ -45,6 +45,6 @@ test_leaks: bin/$(NAME)
 $(BIN_DIR):
 	mkdir $(BIN_DIR)
 
-$(BIN_DIR)/%.o: src/%.c $(LIBFT_DIR)/libft.h # $(BIN_DIR)
+$(BIN_DIR)/%.o: src/%.c $(LIBFT_DIR)/libft.h $(BIN_DIR)
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
 
