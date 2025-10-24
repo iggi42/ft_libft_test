@@ -101,6 +101,10 @@ T(strtrim_empty2)
 T(split_easy)
 {
  const char *input = "01 23 45 67 89";
- const char **result = ft_split(input, ' ');
- cr_assert_eq(ftt_array_lenth(m, const size_t el_s))
+ char **result = ft_split(input, ' ');
+ cr_assert_str_eq(result[0], "01");
+ cr_assert_str_eq(result[1], "23");
+ cr_assert_str_eq(result[2], "45");
+ cr_assert_str_eq(result[3], "67");
+ cr_assert_str_eq(result[4], "89");
 }
