@@ -4,6 +4,7 @@
 #include <libft.h>
 #include <string.h>
 #include <limits.h>
+#include "../include/ftt.h"
 
 #define T(a) Test(libft_str2, a)
 
@@ -86,7 +87,7 @@ T(strtrim_empty)
  const char *set = "0123456789";
  const char *s1 = "";
  const char *result = ft_strtrim(s1, set);
- cr_assert_str_eq("", result);
+ cr_assert_str_eq(result, "");
 }
 
 T(strtrim_empty2)
@@ -97,14 +98,16 @@ T(strtrim_empty2)
  cr_assert_str_eq("jkjk", result);
 }
 
-
 T(split_easy)
 {
  const char *input = "01 23 45 67 89";
  char **result = ft_split(input, ' ');
+ cr_assert_neq(result, NULL);
  cr_assert_str_eq(result[0], "01");
  cr_assert_str_eq(result[1], "23");
  cr_assert_str_eq(result[2], "45");
  cr_assert_str_eq(result[3], "67");
  cr_assert_str_eq(result[4], "89");
+ size_t result_length = ftt_array_lenth((const t_byte **) result, sizeof(char *));
+ cr_assert_eq(result_length, 5);
 }
