@@ -15,13 +15,12 @@ OBJ = $(C_SRC:%.c=$(BIN_DIR)/%.o)
 
 .PHONY: fclean clean re all test run $(LIBFT)
 
-
 $(NAME): bin/$(NAME)
 pg: bin/pg
 all: $(NAME)
 
 fclean: clean
-	(cd $(LIBFT_DIR) && $(MAKE) fclean)
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 clean:
 	rm -f $(BIN_DIR)/*
@@ -29,7 +28,7 @@ clean:
 re: fclean all
 
 $(LIBFT):
-	(cd $(LIBFT_DIR) && $(MAKE) libft.a)
+	$(MAKE) -C $(LIBFT_DIR) libft.a
 
 bin/$(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) -lcriterion -o $@ $(OBJ) $(LIBFT)
