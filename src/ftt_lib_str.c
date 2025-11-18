@@ -12,7 +12,6 @@
 
 #include "../include/ftt.h"
 #include <criterion/criterion.h>
-#include <criterion/internal/assert.h>
 #include <stdio.h>
 #include <libft.h>
 #include <string.h>
@@ -178,66 +177,6 @@ T(strnstr_man_page)
 	cr_assert_eq(ptr, NULL);
 }
 
-T(atoi_ft)
-{
-	char *s = "42";
-	cr_assert_eq(42, ft_atoi(s));
-}
-
-T(atoi_easy)
-{
-	char *s = "123";
-	cr_assert_eq(123, ft_atoi(s));
-}
-
-T(atoi_zero)
-{
-	char *s = "0";
-	cr_assert_eq(0, ft_atoi(s));
-}
-
-T(atoi_neg_easy)
-{
-	char *s = "-123";
-	cr_assert_eq(-123, ft_atoi(s));
-}
-
-T(atoi_pre0_neg)
-{
-	char *s = "-00123";
-	cr_assert_eq(-123, ft_atoi(s));
-}
-
-T(atoi_pre0_pov)
-{
-	char *s = "-00123";
-	cr_assert_eq(-123, ft_atoi(s));
-}
-
-T(atoi_int_max)
-{
-	char *s = "-2147483648";
-	cr_assert_eq(-2147483648, ft_atoi(s));
-}
-
-T(atoi_int_max_bs)
-{
-	char *s = "  -2147483648 jkljklj";
-	cr_assert_eq(-2147483648, ft_atoi(s));
-}
-
-T(atoi_int_min)
-{
-	char *s = "2147483647";
-	cr_assert_eq(2147483647, ft_atoi(s));
-}
-
-T(atoi_bs_afterwards)
-{
-	char *s = "-00123";
-	cr_assert_eq(-123, ft_atoi(s));
-}
-
 T(substr_easy)
 {
  const char *base = "12345678";
@@ -340,4 +279,64 @@ T(split_easy)
  cr_assert_str_eq(result[4], "89");
  size_t result_length = ftt_array_lenth((const t_byte **) result, sizeof(char *));
  cr_assert_eq(result_length, 5);
+}
+
+T(atoi_ft)
+{
+	char *s = "42";
+	cr_assert_eq(42, ft_atoi(s));
+}
+
+T(atoi_easy)
+{
+	char *s = "123";
+	cr_assert_eq(123, ft_atoi(s));
+}
+
+T(atoi_zero)
+{
+	char *s = "0";
+	cr_assert_eq(0, ft_atoi(s));
+}
+
+T(atoi_neg_easy)
+{
+	char *s = "-123";
+	cr_assert_eq(-123, ft_atoi(s));
+}
+
+T(atoi_pre0_neg)
+{
+	char *s = "-00123";
+	cr_assert_eq(-123, ft_atoi(s));
+}
+
+T(atoi_pre0_pov)
+{
+	char *s = "-00123";
+	cr_assert_eq(-123, ft_atoi(s));
+}
+
+T(atoi_int_max)
+{
+	char *s = "-2147483648";
+	cr_assert_eq(-2147483648, ft_atoi(s));
+}
+
+T(atoi_int_max_bs)
+{
+	char *s = "  -2147483648 jkljklj";
+	cr_assert_eq(-2147483648, ft_atoi(s));
+}
+
+T(atoi_int_min)
+{
+	char *s = "2147483647";
+	cr_assert_eq(2147483647, ft_atoi(s));
+}
+
+T(atoi_bs_afterwards)
+{
+	char *s = "-00123";
+	cr_assert_eq(-123, ft_atoi(s));
 }
