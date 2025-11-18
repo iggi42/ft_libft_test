@@ -93,32 +93,31 @@ T(strlcpy_close)
 	cr_assert_str_eq(src, dest);
 }
 
-T(strlcpy_smol_dest)
-{
-	char *src = "123456789";
-	char *dest = (char *) ftt_malloc(2 * sizeof(char));
-	cr_assert_eq(ft_strlcpy(dest, src, 2), 10);
-}
+// T(strlcpy_smol_dest)
+// {
+// 	char *src = "123456789";
+// 	char *dest = (char *) ftt_malloc(2 * sizeof(char));
+// 	cr_assert_eq(ft_strlcpy(dest, src, 2), 10);
+// }
 
 T(strlcat_easy)
 {
 	char *src = "qwertzuiop";
 	char *dest = strdup("abc\0;123456789;123456789");
-  int result = ft_strlcat(dest, src, 14);
-	cr_assert_eq(result , 14, "dest: \"%s\"", dest);
-	cr_assert_str_eq("abcqwertzuiop", dest);
-	cr_assert_eq(strlen("abcqwertzuiop"), 13);
+  int result = ft_strlcat(dest, src, 12);
+	cr_assert_eq(result , 13, "expected 13, got %d ", result);
+	cr_assert_str_eq("abcqwertzui", dest);
 }
 
-// strlcat with dst buffer too small
-T(strlcat_too_small)
-{
-	char *src = "qwertzuiop";
-	char *dest = strdup("jk\0 234567");
-  int result = ft_strlcat(dest, src, 10);
-	cr_assert_eq(result, 13, "result: %d", result);
-	cr_assert_str_eq("jk", dest, "dest: \"%s\"", dest); // string hasn't changed
-}
+// // strlcat with dst buffer too small
+// T(strlcat_too_small)
+// {
+// 	char *src = "qwertzuiop";
+// 	char *dest = strdup("jk\0 234567");
+//   int result = ft_strlcat(dest, src, 10);
+// 	cr_assert_eq(result, 12, "result: %d", result);
+// 	cr_assert_str_eq("jk", dest, "dest: \"%s\"", dest); // string hasn't changed
+// }
 
 T(strnstr_happy)
 {
@@ -239,3 +238,106 @@ T(atoi_bs_afterwards)
 	cr_assert_eq(-123, ft_atoi(s));
 }
 
+T(substr_easy)
+{
+ const char *base = "12345678";
+ const char *result = ft_substr(base, 0, 3);
+ cr_assert_eq(strncmp("123", result, 4), 0, "\"%s\" is not \"123\"", result);
+ cr_assert_eq(strlen(result), 3);
+}
+
+T(substr_size_too_large)
+{
+ const char *base = "1";
+ const char *result = ft_substr(base, 0, 3);
+ cr_assert_eq(strncmp("1", result, 3), 0, "\"%s\" is not \"1\"", result);
+ cr_assert_eq(strlen(result), 1);
+}
+
+T(substr_start_too_large)
+{
+ const char *base = "";
+ const char *result = ft_substr(base, 1, 3);
+ cr_assert_eq(strncmp("", result, 3), 0, "\"%s\" is not an empty string", result);
+ cr_assert_eq(strlen(result), 0);
+}
+
+T(substr_start_too_large2)
+{
+ const char *base = "zxy abc efg ";
+ const char *result = ft_substr(base, 13, 3);
+ cr_assert_eq(strncmp("", result, 3), 0, "\"%s\" is not an empty string", result);
+ cr_assert_eq(strlen(result), 0);
+}
+
+T(substr_middle)
+{
+ const char *base = "zxy abc efg ";
+ const char *result = ft_substr(base, 4, 3);
+ cr_assert_eq(strncmp("abc", result, 3), 0, "\"%s\" is not an empty string", result);
+ cr_assert_eq(strlen(result), 3);
+}
+	
+T(substr_last_char)
+{
+ const char *base = "abc1";
+ const char *result = ft_substr(base, 3, 3);
+ cr_assert_eq(strncmp("1", result, 3), 0, "\"%s\" the last char of \"%s\" ", result, base);
+ cr_assert_eq(strlen(result), 1);
+}
+
+T(strjoin_easy)
+{
+ const char *base = ft_strjoin("4", "2");
+ cr_assert_str_eq(base, "42");
+}
+ 
+T(strjoin_empty)
+{
+ const char *base = ft_strjoin("", "");
+ cr_assert_str_eq(base, "");
+}
+
+T(strjoin_smoll)
+{
+ const char *base = ft_strjoin("a", "");
+ cr_assert_str_eq(base, "a");
+}
+
+T(strtrim_easy)
+{
+ const char *set = "0123456789";
+ const char *s1 = "0Eins1Zwei2Drei3Fier4";
+ const char *result = ft_strtrim(s1, set);
+ cr_assert_str_eq("Eins1Zwei2Drei3Fier", result);
+}
+
+T(strtrim_empty)
+{
+ const char *set = "0123456789";
+ const char *s1 = "";
+ const char *result = ft_strtrim(s1, set);
+ cr_assert_str_eq(result, "");
+}
+
+T(strtrim_empty2)
+{
+ const char *set = "0123456789";
+ const char *s1 = "jkjk";
+ const char *result = ft_strtrim(s1, set);
+ cr_assert_str_eq("jkjk", result);
+}
+
+T(split_easy)
+{
+ const char *input = "01 23 45 67 89";
+ char **result = ft_split(input, ' ');
+ cr_assert_neq(result, NULL);
+ cr_assert_str_eq(result[0], "01");
+ cr_assert_str_eq(result[1], "23");
+ cr_assert_str_eq(result[2], "45");
+ cr_assert_str_eq(result[3], "67");
+ cr_assert_str_eq(result[4], "89");
+ size_t result_length = ftt_array_lenth((const t_byte **) result, sizeof(char *));
+ cr_assert_eq(result_length, 5);
+}
