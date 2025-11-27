@@ -77,7 +77,7 @@ T(strtrim_easy)
  const char *set = "0123456789";
  const char *s1 = "0Eins1Zwei2Drei3Fier4";
  const char *result = ft_strtrim(s1, set);
- cr_assert_str_eq("EinsZweiDreiFier", result);
+ cr_assert_str_eq("Eins1Zwei2Drei3Fier", result);
 }
 
 T(strtrim_empty)
