@@ -12,6 +12,7 @@
 
 #include "../include/ftt.h"
 #include <criterion/criterion.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <libft.h>
 #include <string.h>
@@ -339,4 +340,40 @@ T(atoi_bs_afterwards)
 {
 	char *s = "-00123";
 	cr_assert_eq(-123, ft_atoi(s));
+}
+
+T(itoa_simple)
+{
+	cr_assert_str_eq("42", ft_itoa(42));
+	cr_assert_str_eq("-1", ft_itoa(-1));
+	cr_assert_str_eq("0", ft_itoa(0));
+}
+
+T(itoa_INT_MAX)
+{
+	char *s_int_max = (char *) malloc(15 * sizeof(char));
+	snprintf(s_int_max, 15, "%d", INT_MAX);
+	cr_assert_str_eq(s_int_max, ft_itoa(INT_MAX));
+}
+
+T(btoa_FF)
+{
+	char *s = (char *) malloc(2);
+	ft_btoa(0xFF, s);
+	cr_assert_eq(s[0], 'F');
+	cr_assert_eq(s[1], 'F');
+}
+
+T(btoa_A0)
+{
+	char *s = (char *) malloc(2);
+	ft_btoa(0xA0, s);
+	cr_assert_eq(s[0], 'A');
+	cr_assert_eq(s[1], '0');
+}
+
+T(ptoa_null)
+{
+	char *s = ft_ptoa(NULL);
+	cr_assert_str_eq(s, "0x0000000000000000");
 }
