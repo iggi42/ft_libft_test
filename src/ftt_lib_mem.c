@@ -142,6 +142,13 @@ Test(libft_mem, memchr_easy)
 	cr_assert_eq(a, result);
 }
 
+Test(libft_mem, memchr_easy_not_found)
+{
+	char a[] = {'a', 'b', 'c'};
+	void *result = ft_memchr(a, 'z', 3);
+	cr_assert_eq(NULL, result);
+}
+
 Test(libft_mem, memmove_easy)
 {
 	// TODO

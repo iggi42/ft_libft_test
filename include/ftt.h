@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FTT_LIB_H
-#define FTT_LIB_H
-#include <stdlib.h>
-#include <libft.h>
+# define FTT_LIB_H
+# include <stdlib.h>
+# include <libft.h>
 
 void *ftt_malloc(size_t s);
 
