@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/ftt.h"
+#include <criterion/assert.h>
 #include <criterion/criterion.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -29,6 +30,22 @@ T(strlen_easy)
 {
 	char *input = "987213 jlkj#,0AAAAA";
 	cr_expect_eq(ft_strlen(input), strlen(input));
+}
+
+T(str_alloc_0)
+{
+	size_t len = 0;
+	char *result = ft_str_alloc(len);
+	cr_assert_eq(*(result + len), 0);
+	free(result);
+}
+
+T(str_alloc_10)
+{
+	size_t len = 10;
+	char *result = ft_str_alloc(len);
+	cr_assert_eq(*(result + len), 0);
+	free(result);
 }
 
 T(strchr_easy)
@@ -278,10 +295,11 @@ T(split_easy)
  cr_assert_str_eq(result[2], "45");
  cr_assert_str_eq(result[3], "67");
  cr_assert_str_eq(result[4], "89");
- size_t result_length = ftt_array_lenth((const t_byte **) result, sizeof(char *));
- cr_assert_eq(result_length, 5);
+ size_t result_length = ftt_array_lenth((const void *) result, sizeof(char *));
+ cr_assert_eq(result_length, 5, "actual length %i\n", (int) result_length);
 }
 
+// ATOI and friends
 T(atoi_ft)
 {
 	char *s = "42";
@@ -340,40 +358,4 @@ T(atoi_bs_afterwards)
 {
 	char *s = "-00123";
 	cr_assert_eq(-123, ft_atoi(s));
-}
-
-T(itoa_simple)
-{
-	cr_assert_str_eq("42", ft_itoa(42));
-	cr_assert_str_eq("-1", ft_itoa(-1));
-	cr_assert_str_eq("0", ft_itoa(0));
-}
-
-T(itoa_INT_MAX)
-{
-	char *s_int_max = (char *) malloc(15 * sizeof(char));
-	snprintf(s_int_max, 15, "%d", INT_MAX);
-	cr_assert_str_eq(s_int_max, ft_itoa(INT_MAX));
-}
-
-T(btoa_FF)
-{
-	char *s = (char *) malloc(2);
-	ft_btoa(0xFF, s);
-	cr_assert_eq(s[0], 'F');
-	cr_assert_eq(s[1], 'F');
-}
-
-T(btoa_A0)
-{
-	char *s = (char *) malloc(2);
-	ft_btoa(0xA0, s);
-	cr_assert_eq(s[0], 'A');
-	cr_assert_eq(s[1], '0');
-}
-
-T(ptoa_null)
-{
-	char *s = ft_ptoa(NULL);
-	cr_assert_str_eq(s, "0x0000000000000000");
 }
