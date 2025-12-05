@@ -36,7 +36,7 @@ T(str_alloc_0)
 {
 	size_t len = 0;
 	char *result = ft_str_alloc(len);
-	cr_assert_eq(*(result + len), 0);
+	cr_assert_eq(*(result + len), 0, "nope: actual string : [%s]\n",result);
 	free(result);
 }
 
@@ -44,7 +44,7 @@ T(str_alloc_10)
 {
 	size_t len = 10;
 	char *result = ft_str_alloc(len);
-	cr_assert_eq(*(result + len), 0);
+	cr_assert_eq(*(result + len), 0, "nope: actual string : [%s]\n",result);
 	free(result);
 }
 

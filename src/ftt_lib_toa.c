@@ -31,7 +31,6 @@ T(ulto_bl_easy_0)
   cr_assert_str_eq(target, "0");
 }
 
-
 T(ulto_bl_easy_1)
 {
   unsigned long nb = 1;
@@ -42,38 +41,40 @@ T(ulto_bl_easy_1)
   cr_assert_str_eq(target, "1");
 }
 
-
 T(ltoa_b_easy_pos)
 {
-  cr_assert_str_eq(ft_ultoa_b(4, DEC_ALPHABET), "4");
+  cr_assert_str_eq(ft_ultoa_b(4, FT_ALPHABET_DEC), "4");
 }
-
 
 T(ltoa_b_easy_42)
 {
-  cr_assert_str_eq(ft_ultoa_b(42, DEC_ALPHABET), "42");
+  cr_assert_str_eq(ft_ultoa_b(42, FT_ALPHABET_DEC), "42");
 }
 
-// T(ltoa_b_easy_neg)
-// {
-//   cr_assert_str_eq(ft_ultoa_b(-4, DEC_ALPHABET), "-4");
-// }
+T(ltoa_b_easy_neg)
+{
+  cr_assert_str_eq(ft_ltoa_b(-4, FT_ALPHABET_DEC), "-4");
+}
 
-// T(ltoa_b_neg_min)
-// {
-//   char buffer[100];
-//   char *expected = (char *) &buffer;
-//   sprintf(expected, "%ld", LONG_MIN);
-//   char *actual = ft_ultoa_b(LONG_MIN, DEC_ALPHABET);
-//   cr_assert_str_eq(expected, actual);
-// }
+T(ltoa_bl_easy_neg)
+{
+  cr_assert_eq(ft_ltoa_bl(-4, NULL, 0, FT_ALPHABET_DEC), 2);
+}
+
+T(ltoa_b_neg_min)
+{
+  char *expected = ft_str_alloc(10);
+  sprintf(expected, "%ld", LONG_MIN);
+  char *actual = ft_ltoa_b(LONG_MIN, FT_ALPHABET_DEC);
+  cr_assert_str_eq(expected, actual);
+}
 
 T(ltoa_b_pos_max)
 {
   char buffer[100];
   char *expected = (char *) &buffer;
   sprintf(expected, "%ld", LONG_MAX);
-  char *actual = ft_ultoa_b(LONG_MIN, DEC_ALPHABET);
+  char *actual = ft_ultoa_b(LONG_MAX, FT_ALPHABET_DEC);
   cr_assert_str_eq(expected, actual);
 }
 
