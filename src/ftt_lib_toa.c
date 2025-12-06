@@ -56,6 +56,11 @@ T(ltoa_b_easy_neg)
   cr_assert_str_eq(ft_ltoa_b(-4, FT_ALPHABET_DEC), "-4");
 }
 
+T(ltoa_b_zero)
+{
+  cr_assert_str_eq(ft_ltoa_b(0, FT_ALPHABET_DEC), "0");
+}
+
 T(ltoa_bl_easy_neg)
 {
   cr_assert_eq(ft_ltoa_bl(-4, NULL, 0, FT_ALPHABET_DEC), 2);
@@ -85,6 +90,19 @@ T(itoa_simple)
 	cr_assert_str_eq("0", ft_itoa(0));
 }
 
+T(itoa_binary_base)
+{
+  cr_assert_str_eq(ft_itoa_b(1, "0X"), "X");
+  cr_assert_str_eq(ft_itoa_b(0, "0X"), "0");
+}
+
+T(itoa_binary_base_larg)
+{
+  cr_assert_str_eq(ft_itoa_b(2, "01"), "10");
+  cr_assert_str_eq(ft_itoa_b(42, "01"), "101010");
+  cr_assert_str_eq(ft_itoa_b(4, "0X"), "X00");
+}
+
 T(itoa_INT_MAX)
 {
 	char *s_int_max = (char *) malloc(15 * sizeof(char));
@@ -103,6 +121,12 @@ T(btoa_A0)
 	char *s = ft_btoa(0xA0);
 	cr_assert_str_eq(s, "A0");
 }
+
+T(btoa_b_max_value)
+{
+  cr_assert_str_eq(ft_btoa_b(-1, "01"), "11111111");
+}
+
 
 // T(ptoa_null)
 // {
