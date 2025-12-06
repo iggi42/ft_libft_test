@@ -17,6 +17,7 @@
 #include <criterion/internal/assert.h>
 #include <libft.h>
 #include <string.h>
+#include <stdbool.h>
 
 # define T(a) Test(libft_mem, a)
 
@@ -28,7 +29,7 @@ T(memcpy_easy)
 	cr_assert_eq(memcmp(src, dest, sizeof(src)), 0, "0 != memcmp(%p, %p, %d)", src, dest, (int) sizeof(src));
 }
 
-Test(libft_mem, bzero_simple)
+T(bzero_simple)
 {
 	int *target = ftt_malloc(42 * sizeof(int));
 	ft_bzero(target, 42 * sizeof(int));
@@ -40,14 +41,14 @@ Test(libft_mem, bzero_simple)
 	free(target);
 }
 
-Test(libft_mem, bzero_empty)
+T(bzero_empty)
 {
 	int *arr = (int *) ftt_malloc(0 * sizeof(int));
 	ft_bzero(arr, 0);
 	free(arr);
 }
 
-Test(libft_mem, memset_simple)
+T(memset_simple)
 {
 	size_t size = 20;
 	int val = 2;
@@ -65,7 +66,7 @@ Test(libft_mem, memset_simple)
 	free(target);
 }
 
-Test(libft_mem, memset_system_cmp)
+T(memset_system_cmp)
 {
 	size_t size = 20;
 	int val = 2;
@@ -80,14 +81,14 @@ Test(libft_mem, memset_system_cmp)
 	free(a_s);
 }
 
-Test(libft_mem, memset_empty)
+T(memset_empty)
 {
 	int *target = (int *) ftt_malloc(0 * sizeof(int));
 	ft_memset(target, (int) 'S', 0);
 	free(target);
 }
 
-Test(libft_mem, calloc_simple)
+T(calloc_simple)
 {
 	int *target = (int *) ft_calloc(42, sizeof(int));
 
@@ -97,21 +98,21 @@ Test(libft_mem, calloc_simple)
 	free(target);
 }
 
-Test(libft_mem, calloc_empty)
+T(calloc_empty)
 {
 	int *target = (int *) ft_calloc(0, sizeof(int));
 
 	free(target);
 }
 
-Test(libft_mem, calloc_empty2)
+T(calloc_empty2)
 {
 	int *target = (int *) ft_calloc(1, 0);
 
 	free(target);
 }
 
-Test(libft_mem, memcmp_eq)
+T(memcmp_eq)
 {
 	int a1[] = {1, 2, 3};
 	int a2[] = {1, 2, 3};
@@ -119,7 +120,7 @@ Test(libft_mem, memcmp_eq)
 	cr_assert_eq(result, 0, "0 should be equal, but is %d", result);
 }
 
-Test(libft_mem, memcmp_lower)
+T(memcmp_lower)
 {
 	char a1[] = {1, 2, 3, 4};
 	char a2[] = {1, 2, 100, 4};
@@ -127,7 +128,7 @@ Test(libft_mem, memcmp_lower)
   cr_assert_lt(result, 0, "result be negative, but is '%d'", result);
 }
 
-Test(libft_mem, memcmp_higher)
+T(memcmp_higher)
 {
 	char a1[] = {1, 2, 3, 4};
 	char a2[] = {1, 2, 1, 4};
@@ -135,14 +136,39 @@ Test(libft_mem, memcmp_higher)
   cr_assert_gt(result, 0, "result be positive, but is '%d'", result);
 }
 
-Test(libft_mem, memchr_easy)
+T(memchr_easy)
 {
 	char a[] = {'a', 'b', 'c'};
 	void *result = ft_memchr(a, 'a', 3);
 	cr_assert_eq(a, result);
 }
 
-Test(libft_mem, memmove_easy)
+T(memchr_easy_not_found)
+{
+	char a[] = {'a', 'b', 'c'};
+	void *result = ft_memchr(a, 'z', 3);
+	cr_assert_eq(NULL, result);
+}
+
+T(memmove_easy)
 {
 	// TODO
+}
+
+T(iszero_yes)
+{
+	int i = 0;
+	cr_assert_eq(ft_iszero(&i, sizeof(int)), true);
+}
+
+T(iszero_no)
+{
+	t_byte i[4] = {0, 0, 1, 0};
+	cr_assert_eq(ft_iszero(&i, 4), false);
+}
+
+T(iszero_yes_size)
+{
+	t_byte i[4] = {0, 2, 1, 4};
+	cr_assert_eq(ft_iszero(&i, 1), true);
 }

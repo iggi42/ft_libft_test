@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "../include/ftt.h"
+#include "libft.h"
+#include <stdlib.h>
+#include <stdbool.h>
 
 void *ftt_malloc(size_t s)
 {
@@ -24,4 +27,27 @@ void *ftt_malloc(size_t s)
 		i++;
 	}
 	return (result);
+}
+
+bool is_zero(const void *start, const size_t size)
+{
+	if (size == 0)
+		return true;
+	t_byte rele = * (t_byte *) start;
+	if (rele != 0)
+		return false;
+	return is_zero(start + 1, size - 1);
+}
+
+size_t ftt_array_lenth(const void *start, const size_t el_s)
+{
+	size_t l;
+
+	l = 0;
+	while (!is_zero(start, el_s))
+	{
+		start += el_s;
+		l++;
+	}
+	return (l);
 }
