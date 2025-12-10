@@ -16,6 +16,7 @@
 #include <criterion/criterion.h>
 #include <criterion/internal/assert.h>
 #include <libft.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 
@@ -171,4 +172,24 @@ T(iszero_yes_size)
 {
 	t_byte i[4] = {0, 2, 1, 4};
 	cr_assert_eq(ft_iszero(&i, 1), true);
+}
+
+T(ft_free_1)
+{
+	int *a = (int *) malloc(sizeof(int));
+	cr_assert_null(ft_free(&a));
+	cr_assert_null(a);
+}
+
+T(ft_free_3)
+{
+	int *a = (int *) malloc(sizeof(int));
+	int *b = (int *) malloc(sizeof(int));
+	int *c = (int *) malloc(sizeof(int));
+	int *d = (int *) malloc(sizeof(int));
+	cr_assert_null(ft_free(&a, &b, &c, &d));
+	cr_assert_null(a);
+	cr_assert_null(b);
+	cr_assert_null(c);
+	cr_assert_null(d);
 }
