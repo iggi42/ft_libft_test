@@ -1,9 +1,18 @@
 CC = cc
-CFLAGS += -Wall -Wextra -Werror -g -fprofile-arcs -ftest-coverage -O1
+CFLAGS += -Wall -Wextra -Werror -g
+# -fprofile-arcs -ftest-coverage -O1
 # before an include!
 NAME = libft_test
 # $(shell basename $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST)))))
-C_SRC = ftt_utils.c ftt_lib_ctype.c ftt_lib_str.c ftt_lib_mem.c ftt_lib_meta.c ftt_lib_toa.c
+C_SRC += ftt_utils.c
+C_SRC += ftt_lib_meta.c
+C_SRC += ftt_lib_ctype.c
+C_SRC += ftt_lib_mem.c
+C_SRC += ftt_lib_str.c
+C_SRC += ftt_lib_fmt.c
+C_SRC += ftt_lib_iol.c
+C_SRC += ftt_lib_toa.c
+
 LIBFT_DIR = ../libft
 LIBFT = $(LIBFT_DIR)/libft.a
 VALGRIND = valgrind -q --trace-children=yes
@@ -22,7 +31,7 @@ fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 clean:
-	rm -f $(BIN_DIR)/*
+	rm -f ./$(BIN_DIR)/*
 
 re: fclean all
 
@@ -40,6 +49,7 @@ test: bin/$(NAME)
 
 test_leaks: bin/$(NAME)
 	$(VALGRIND) ./bin/$(NAME)
+
 $(BIN_DIR):
 	mkdir $(BIN_DIR)
 

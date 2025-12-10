@@ -28,6 +28,7 @@ T(memcpy_easy)
 	int *dest = ftt_malloc(sizeof(src));
 	cr_assert_eq(dest, ft_memcpy(dest, src, sizeof(src)));
 	cr_assert_eq(memcmp(src, dest, sizeof(src)), 0, "0 != memcmp(%p, %p, %d)", src, dest, (int) sizeof(src));
+	free(dest);
 }
 
 T(bzero_simple)

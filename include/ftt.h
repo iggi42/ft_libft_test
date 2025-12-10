@@ -17,5 +17,6 @@
 void *ftt_malloc(size_t s);
 
 size_t ftt_array_lenth(const void *start, const size_t el_s);
+void ftt_array_free(const void **start);
 
 #endif

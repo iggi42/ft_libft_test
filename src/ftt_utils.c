@@ -39,6 +39,16 @@ bool is_zero(const void *start, const size_t size)
 	return is_zero(start + 1, size - 1);
 }
 
+void ftt_array_free(const void **start)
+{
+	void **current;
+
+	current = (void **) start;
+	while(*current)
+		free(*(current++));
+	free(start);
+}
+
 size_t ftt_array_lenth(const void *start, const size_t el_s)
 {
 	size_t l;
