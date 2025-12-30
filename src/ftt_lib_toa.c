@@ -12,6 +12,7 @@
 
 #include "../include/ftt.h"
 #include "libft.h"
+#include "libft_locale.h"
 #include <limits.h>
 #include <criterion/criterion.h>
 #include <criterion/assert.h>
