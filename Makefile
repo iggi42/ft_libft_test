@@ -16,12 +16,13 @@ C_SRC += ftt_lib_toa.c
 LIBFT_DIR = ../libft
 LIBFT = $(LIBFT_DIR)/libft.a
 VALGRIND = valgrind -q --trace-children=yes
+FUNCHECK = funcheck
 
 C_DIR = ./src
 BIN_DIR = ./bin
 OBJ = $(C_SRC:%.c=$(BIN_DIR)/%.o)
 
-.PHONY: fclean clean re all test run $(LIBFT)
+.PHONY: fclean clean re all test run $(LIBFT) ride test_leaks
 
 $(NAME): bin/$(NAME)
 pg: bin/pg
@@ -33,19 +34,22 @@ fclean: clean
 clean:
 	rm -f ./$(BIN_DIR)/*
 
-re: fclean all
+re: clean all
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR) libft.a
+	$(MAKE) -C $(LIBFT_DIR)
 
-bin/$(NAME): $(OBJ) $(LIBFT)
+$(BIN_DIR)/$(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) -lcriterion -o $@ $(OBJ) $(LIBFT)
 
 $(BIN_DIR)/pg: src/ftt_utils.c src/pg.c $(LIBFT)
-	$(CC) $(CFLAGS) src/ftt_utils.c src/pg.c -I$(LIBFT_DIR) -lbsd -o $(BIN_DIR)/pg $(LIBFT)
+	$(CC) $(CFLAGS) src/ftt_utils.c src/pg.c -I$(LIBFT_DIR) -lbsd -o $@ $(LIBFT)
 
 test: bin/$(NAME)
 	./bin/$(NAME)
+
+ride: bin/pg
+	$(FUNCHECK) bin/pg
 
 test_leaks: bin/$(NAME)
 	$(VALGRIND) ./bin/$(NAME)
@@ -53,6 +57,6 @@ test_leaks: bin/$(NAME)
 $(BIN_DIR):
 	mkdir $(BIN_DIR)
 
-$(BIN_DIR)/%.o: src/%.c $(LIBFT_DIR)/libft.h $(BIN_DIR)
+$(BIN_DIR)/%.o: src/%.c $(BIN_DIR)
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
 

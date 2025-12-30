@@ -154,7 +154,7 @@ T(memchr_easy_not_found)
 
 T(memmove_easy)
 {
-	// TODO
+	// TODO, lmao
 }
 
 T(iszero_yes)

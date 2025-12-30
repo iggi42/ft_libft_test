@@ -1,9 +1,9 @@
 #include "../include/ftt.h"
-#include "libft_str.h"
 #include <criterion/assert.h>
 #include <criterion/criterion.h>
 #include <limits.h>
 #include <stdio.h>
+#include <libft_str.h>
 
 #define T(a) Test(libft_fmt, a)
 
@@ -39,6 +39,13 @@ T(str_op_s)
 	free(s);
 }
 
+T(str_op_s_NULL)
+{
+	char *s;
+	cr_assert_str_eq(s = ft_strf("hello [%s]", (char *) NULL), "hello [(null)]");
+	free(s);
+}
+
 T(str_op_d)
 {
 	char *s;
@@ -71,7 +78,7 @@ T(str_op_escape)
 T(str_op_u_0)
 {
 	char *s;
-	cr_assert_str_eq(s =ft_strf("unsigned decimal answer: %u", 0),
+	cr_assert_str_eq(s = ft_strf("unsigned decimal answer: %u", 0),
 		"unsigned decimal answer: 0");
 	free(s);
 }
@@ -84,7 +91,6 @@ T(str_op_x_dead_beef)
 	free(s);
 }
 
-
 T(str_op_X_bad_idea)
 {
 	char *s;
@@ -94,7 +100,6 @@ T(str_op_X_bad_idea)
 	);
 	free(s);
 }
-
 
 T(str_op_p_null)
 {
@@ -118,6 +123,3 @@ T(str_op_p_sprintf)
 	);
 	free(s);
 }
-
-
-// ft_printf("just a %%\n");
