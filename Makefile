@@ -1,5 +1,6 @@
 CC = cc
 CFLAGS += -Wall -Wextra -Werror -g
+export FT_EXTRA_CFLAGS += -g
 # -fprofile-arcs -ftest-coverage -O1
 # before an include!
 NAME = libft_test
@@ -12,6 +13,8 @@ C_SRC += ftt_lib_str.c
 C_SRC += ftt_lib_fmt.c
 C_SRC += ftt_lib_iol.c
 C_SRC += ftt_lib_toa.c
+C_SRC += ftt_lib_kv.c
+C_SRC += ftt_lib_arr.c
 
 LIBFT_DIR = ../libft
 LIBFT = $(LIBFT_DIR)/libft.a
