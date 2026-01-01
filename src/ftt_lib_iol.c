@@ -9,9 +9,8 @@
 /*   Updated: 2025/12/05 15:29:23 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../include/ftt.h"
-#include "libft.h"
+#include <libft_iol.h>
+#include <libft_mem.h>
 #include <criterion/criterion.h>
 
 #define T(a) Test(libft_iol, a)
