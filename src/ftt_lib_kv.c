@@ -37,6 +37,20 @@ T(put_overwrites)
 	ft_kv_free(store);
 }
 
+T(put_overwrites_delete_once)
+{
+	char *key = "key";
+	char *val1 = "42";
+	char *val2 = "34";
+	t_kv_store *store = ft_kv_init();
+	ft_kv_put(store, key, val1);
+	ft_kv_put(store, key, val2);
+	cr_assert_eq(ft_kv_get(store, key), val2);
+	cr_assert_eq(ft_kv_pop(store, key), val2);
+	cr_assert_null(ft_kv_get(store, key));
+	ft_kv_free(store);
+}
+
 T(two_keys)
 {
 	char *key1 = "key34";
