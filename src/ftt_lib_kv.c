@@ -12,14 +12,21 @@
 #include <criterion/criterion.h>
 #include <libft_kv.h>
 #include <libft_arr.h>
+#include <libft_str.h>
+#include <libft_io.h>
 
 #define T(a) Test(libft_kv, a)
+
+int str_key_cmp(t_kv_key k1, t_kv_key k2)
+{
+	return ft_strncmp((const char *)k1, (const char *) k2, 10);
+}
 
 T(init_put_get)
 {
 	char *key = "key";
 	char *val = "42";
-	t_kv_store *store = ft_kv_init();
+	t_kv *store = ft_kv_init(str_key_cmp);
 	ft_kv_put(store, key, val);
 	cr_assert_eq(ft_kv_get(store, key), val);
 	ft_kv_free(store);
@@ -30,7 +37,7 @@ T(put_overwrites)
 	char *key = "key";
 	char *val1 = "42";
 	char *val2 = "34";
-	t_kv_store *store = ft_kv_init();
+	t_kv *store = ft_kv_init(str_key_cmp);
 	ft_kv_put(store, key, val1);
 	ft_kv_put(store, key, val2);
 	cr_assert_eq(ft_kv_get(store, key), val2);
@@ -42,11 +49,12 @@ T(put_overwrites_delete_once)
 	char *key = "key";
 	char *val1 = "42";
 	char *val2 = "34";
-	t_kv_store *store = ft_kv_init();
+	t_kv *store = ft_kv_init(str_key_cmp);
 	ft_kv_put(store, key, val1);
 	ft_kv_put(store, key, val2);
 	cr_assert_eq(ft_kv_get(store, key), val2);
-	cr_assert_eq(ft_kv_pop(store, key), val2);
+    t_kv_value poped = ft_kv_pop(store, key);
+	cr_assert_eq(poped, val2);
 	cr_assert_null(ft_kv_get(store, key));
 	ft_kv_free(store);
 }
@@ -57,7 +65,7 @@ T(two_keys)
 	char *key2 = "key2";
 	char *val1 = "42";
 	char *val2 = "34";
-	t_kv_store *store = ft_kv_init();
+	t_kv *store = ft_kv_init(str_key_cmp);
 	ft_kv_put(store, key1, val1);
 	ft_kv_put(store, key2, val2);
 	cr_assert_eq(ft_kv_get(store, key1), val1);
@@ -70,7 +78,7 @@ T(key_not_found)
 	char *key1 = "key34";
 	char *key2 = "key2";
 	char *val1 = "42";
-	t_kv_store *store = ft_kv_init();
+	t_kv *store = ft_kv_init(str_key_cmp);
 	ft_kv_put(store, key1, val1);
 	cr_assert_null(ft_kv_get(store, key2));
 	ft_kv_free(store);
@@ -82,7 +90,7 @@ T(list_keys)
 	char *key2 = "key2";
 	char *val1 = "42";
 	char *val2 = "34";
-	t_kv_store *store = ft_kv_init();
+	t_kv *store = ft_kv_init(str_key_cmp);
 	ft_kv_put(store, key1, val1);
 	ft_kv_put(store, key2, val2);
 	char **act_keys = (char **) ft_kv_keys(store);
