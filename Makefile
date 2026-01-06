@@ -16,6 +16,7 @@ C_SRC += ftt_lib_toa.c
 C_SRC += ftt_lib_kv.c
 C_SRC += ftt_lib_arr.c
 C_SRC += ftt_lib_lst.c
+C_SRC += ftt_lib_io.c
 
 LIBFT_DIR = ../libft
 LIBFT = $(LIBFT_DIR)/libft.a
