@@ -1,8 +1,9 @@
 CC = cc
-CFLAGS += -Wall -Wextra -Werror -g
+CFLAGS += -Wall -Wextra -Werror -g \
+	--start-no-unused-arguments -lcriterion --end-no-unused-arguments 
 export FT_EXTRA_CFLAGS += -g
 # -fprofile-arcs -ftest-coverage -O1
-# before an include!
+HEADER += ./include/ftt.h
 NAME = libft_test
 # $(shell basename $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST)))))
 C_SRC += ftt_utils.c

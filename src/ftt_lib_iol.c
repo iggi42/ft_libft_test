@@ -28,16 +28,33 @@ T(ft_iol_size_1)
 	char		b[100];
 	t_iol_el	el1;
 	t_list		l1;
-	t_list		*list;
 	size_t		result;
 
 	el1.buffer = (char *)&b;
 	el1.size = 10;
 	l1.content = &el1;
 	l1.next = NULL;
-	list = &l1;
-	result = ft_iol_size(list);
+	result = ft_iol_size(&l1);
 	cr_assert_eq(result, 10, "ne ist %d", (int)result);
+}
+
+T(ft_iol_size_2)
+{
+	char		b[100];
+	t_iol_el	el1, el2;
+	t_list		l1, l2;
+	size_t		result;
+
+	el1.buffer = (char *)&b;
+	el1.size = 10;
+	el2.buffer = (char *)&b  + 20;
+	el2.size = 30;
+	l1.content = &el1;
+	l1.next = &l2;
+	l2.content = &el2;
+	l2.next  = NULL;
+	result = ft_iol_size(&l1);
+	cr_assert_eq(result, 40, "ne ist %d", (int)result);
 }
 
 T(ft_iol_str_null)

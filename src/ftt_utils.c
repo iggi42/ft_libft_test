@@ -10,7 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "../include/ftt.h"
-#include "libft.h"
+#include "criterion/assert.h"
+#include "libft_mem.h"
+#include "libft_str.h"
+#include <criterion/criterion.h>
+#include <criterion/redirect.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
@@ -60,4 +65,16 @@ size_t ftt_array_lenth(const void *start, const size_t el_s)
 		l++;
 	}
 	return (l);
+}
+
+void ftt_assert_io_stdout(const char* expected_str)
+{
+	FILE *stdout = cr_get_redirected_stdout();
+	size_t size = ft_strlen(expected_str);
+	char *red = ft_str_alloc(size);
+	size_t fread_res = fread(red,  sizeof(char), size, stdout);
+	if (fread_res != size)
+		printf("fread return val is fucked\n");
+	// cr_assert_eq(fread_res, size, "fread returned %d, we hoped for %d", (int) fread_res, (int) size);
+	cr_assert_str_eq(red, expected_str, "expected: \"%s\" but stdout had \"%s\"\n", red, expected_str);
 }
