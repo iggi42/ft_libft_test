@@ -20,7 +20,7 @@
 #define T(a) Test(libft_io, a)
 
 #define ftt_printf(expected, template, ...) { \
-	int expected_len = (int) ft_strlen(expected) + 1; \
+	int expected_len = (int) ft_strlen(expected); \
 	int result = ft_printf(template, __VA_ARGS__); \
     cr_assert_eq(result, expected_len, "printf return: %d, strlen of expected: %d \"%s\"\n", result, expected_len, expected); \
     ftt_assert_io_stdout(expected); \

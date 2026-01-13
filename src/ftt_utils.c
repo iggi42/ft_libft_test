@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "../include/ftt.h"
-#include "criterion/assert.h"
 #include "libft_mem.h"
 #include "libft_str.h"
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -78,3 +78,26 @@ void ftt_assert_io_stdout(const char* expected_str)
 	// cr_assert_eq(fread_res, size, "fread returned %d, we hoped for %d", (int) fread_res, (int) size);
 	cr_assert_str_eq(red, expected_str, "expected: \"%s\" but stdout had \"%s\"\n", red, expected_str);
 }
+
+// int ftt_str2fd(const char *s)
+// {
+// 	int		pipe_fds[2];
+// 	int		fork_res;
+// 	char	*result;
+
+// 	fork_res = fork();
+// 	if (fork_res)
+// 	{ // parent part
+// 		ft_putstr_fd(s, pipe_fds[1]);
+// 	}
+// 	else
+// 	{
+// 		// child part
+// 		// waitpid(fork_res, child_res, 10);
+// 		result = ft_gnl(pipe_fds[0]);
+// 		cr_assert_str_eq(result, s);
+// 	}
+// 	close(pipe_fds[0]);
+// 	close(pipe_fds[1]);
+// }
+
