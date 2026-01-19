@@ -21,4 +21,6 @@ void ftt_array_free(const void **start);
 
 void ftt_assert_io_stdout(const char* expected_str);
 
+void ftt_switch(int *a, int *b);
+
 #endif

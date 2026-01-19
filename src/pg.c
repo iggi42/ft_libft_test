@@ -1,3 +1,4 @@
+#include "../include/ftt.h"
 #include "libft_io.h"
 #include "libft_mem.h"
 #include "libft_os.h"
@@ -36,22 +37,30 @@ int	piping(void)
 		return (-420);
 }
 
-void	spawn_test(void)
+// [0] R OUT
+// [1] W OUT
+// [2] R IN
+// [3] W IN
+void	ft_pipe_x(void)
 {
-	int		pipes[2];
-	char	*s;
+	int		fds[4];
+	int		*f;
+	char	result[10];
 	int		pid;
-	char	*l;
+	ssize_t	read_res;
 
-	// int res;
-	s = "echo hello";
-	pid = ft_spawn_cmd(s, __environ, (int **)&pipes);
-	ft_printf("pid: %d\n", pid);
-	// waitpid(pid, &res, 0);
-	l = ft_gnl(pipes[0]);
-	ft_printf("line: \"%s\"\n", l);
-	close(pipes[0]);
-	close(pipes[1]);
+	f = (int *)&fds;
+	ft_memset(result, 'X', 9);
+	(void)pipe(f);
+	(void)pipe(f + 2);
+	ft_printf("fds: [%d, %d, %d, %d]\n", fds[0], fds[1], fds[2], fds[3]);
+	pid = ft_spawn_cmd("echo -n hello", __environ, f + 1);
+	read_res = read(fds[0], &result, 7);
+	ft_printf("read from pid(%d) via fd(%d) res: %d to [%s]\n", pid, fds[0], read_res, result);
+	// waitpid(pid, NULL, 0);
+	ft_bzero(fds, 4 * sizeof(int));
+	read_res = read(fds[0], &result, 5);
+	ft_printf("read from pid(%d) via fd(%d) res: %d to [%s]\n", pid, fds[0], read_res, result);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -59,6 +68,6 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	(void)env;
-	spawn_test();
+	ft_pipe_x();
 	return (0);
 }

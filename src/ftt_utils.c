@@ -79,6 +79,15 @@ void ftt_assert_io_stdout(const char* expected_str)
 	cr_assert_str_eq(red, expected_str, "expected: \"%s\" but stdout had \"%s\"\n", red, expected_str);
 }
 
+void ftt_switch(int *a, int *b)
+{
+	int buf;
+
+	buf = *a;
+	*a = *b;
+	*b = buf;
+}
+
 // int ftt_str2fd(const char *s)
 // {
 // 	int		pipe_fds[2];
