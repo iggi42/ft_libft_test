@@ -1,6 +1,7 @@
 *.o
 libft_tester
 /bin/
+/libft
 *.gcda
 *.gcno
 en.subject.pdf

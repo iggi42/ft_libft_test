@@ -9,6 +9,10 @@ echo '>libc'
 /lib/x86_64-linux-gnu/libc.so.6
 echo
 
+echo '>make'
+make --version
+echo
+
 echo '>ldd'
 ldd --version
 echo

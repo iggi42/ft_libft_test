@@ -1,6 +1,5 @@
 CC = cc
-CFLAGS += -Wall -Wextra -Werror -g \
-	--start-no-unused-arguments -lcriterion --end-no-unused-arguments 
+CFLAGS += -Wall -Wextra -Werror -I../libft/inc/
 export FT_EXTRA_CFLAGS += -g
 # -fprofile-arcs -ftest-coverage -O1
 HEADER += ./include/ftt.h
@@ -18,9 +17,9 @@ C_SRC += ftt_lib_kv.c
 C_SRC += ftt_lib_arr.c
 C_SRC += ftt_lib_lst.c
 C_SRC += ftt_lib_io.c
-C_SRC += ftt_lib_os.c
+# C_SRC += ftt_lib_os.c
 
-LIBFT_DIR = ../libft
+LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 VALGRIND = valgrind -q --trace-children=yes
 FUNCHECK = funcheck

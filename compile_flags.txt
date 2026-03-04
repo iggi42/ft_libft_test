@@ -1,4 +1,4 @@
--I../libft
+-I../libft/inc
 -Wall
 -Wextra
 -Werror
