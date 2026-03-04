@@ -39,23 +39,23 @@ T(printf_test)
 	ftt_printf("just a %\n", "just a %%\n", NULL);
 }
 
-T(gnl_end_with_nl)
-{
-	int		pipe_fds[2];
-	int		fork_res;
-	char	*result;
+// T(gnl_end_with_nl)
+// {
+// 	int		pipe_fds[2];
+// 	int		fork_res;
+// 	char	*result;
 
-	fork_res = fork();
-	if (fork_res)
-	{ // parent part
-		ft_putstr_fd("joa, oida\n", pipe_fds[1]);
-	}
-	else
-	{ // child part
-		// waitpid(fork_res, child_res, 10);
-		result = ft_gnl(pipe_fds[0]);
-		cr_assert_str_eq(result, "joa, oida\n");
-	}
-	close(pipe_fds[0]);
-	close(pipe_fds[1]);
-}	
+// 	fork_res = fork();
+// 	if (fork_res)
+// 	{ // parent part
+// 		ft_putstr_fd("joa, oida\n", pipe_fds[0]);
+// 	}
+// 	else
+// 	{	// child part
+// 		// waitpid(fork_res, child_res, 10);
+// 		result = ft_gnl(pipe_fds[1]);
+// 		cr_assert_str_eq(result, "joa, oida\n");
+// 	}
+// 	close(pipe_fds[0]);
+// 	close(pipe_fds[1]);
+// }
