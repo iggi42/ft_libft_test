@@ -1,6 +1,6 @@
 CC = cc
-CFLAGS += -Wall -Wextra -Werror -I../libft/inc/
-export FT_EXTRA_CFLAGS += -g
+CFLAGS += -Wall -Wextra -Werror -I../libft/inc/ 
+export FT_EXTRA_CFLAGS += -g -v
 # -fprofile-arcs -ftest-coverage -O1
 HEADER += ./include/ftt.h
 NAME = libft_test
@@ -49,7 +49,7 @@ $(BIN_DIR)/$(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) -lcriterion -o $@ $(OBJ) $(LIBFT)
 
 $(BIN_DIR)/pg: src/ftt_utils.c src/pg.c $(LIBFT)
-	$(CC) $(CFLAGS) src/ftt_utils.c src/pg.c -I$(LIBFT_DIR) -lbsd -o $@ $(LIBFT)
+	$(CC) $(CFLAGS) src/ftt_utils.c src/pg.c -O1 -g -I$(LIBFT_DIR) -lcriterion -lbsd -o $@ $(LIBFT)
 
 test: bin/$(NAME)
 	./bin/$(NAME)

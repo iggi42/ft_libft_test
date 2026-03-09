@@ -9,6 +9,7 @@
 /*   Updated: 2025/10/08 14:26:56 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft_arr_t.h"
 #include <criterion/criterion.h>
 #include <libft_kv.h>
 #include <libft_arr.h>
@@ -94,7 +95,7 @@ T(list_keys)
 	ft_kv_put(store, key1, val1);
 	ft_kv_put(store, key2, val2);
 	char **act_keys = (char **) ft_kv_keys(store);
-	cr_assert_eq(ft_arr_len(act_keys), 2);
+	cr_assert_eq(ft_arr_len((t_arr) act_keys), 2, "len is  %d", (int) ft_arr_len((t_arr) act_keys));
     char *exp_keys[] ={ key1, key2, NULL } ;
 
 	size_t i = 0;

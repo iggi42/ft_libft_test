@@ -1,7 +1,7 @@
-#include "../include/ftt.h"
+#include "libft_arr.h"
 #include "libft_io.h"
 #include "libft_mem.h"
-#include "libft_os.h"
+#include "libft_str.h"
 #include <sys/wait.h>
 #include <unistd.h>
 
@@ -37,37 +37,43 @@ int	piping(void)
 		return (-420);
 }
 
-// [0] R OUT
-// [1] W OUT
-// [2] R IN
-// [3] W IN
-void	ft_pipe_x(void)
-{
-	int		fds[4];
-	int		*f;
-	char	result[10];
-	int		pid;
-	ssize_t	read_res;
+#include "libft_kv.h"
 
-	f = (int *)&fds;
-	ft_memset(result, 'X', 9);
-	(void)pipe(f);
-	(void)pipe(f + 2);
-	ft_printf("fds: [%d, %d, %d, %d]\n", fds[0], fds[1], fds[2], fds[3]);
-	pid = ft_spawn_cmd("echo -n hello", __environ, f + 1);
-	read_res = read(fds[0], &result, 7);
-	ft_printf("read from pid(%d) via fd(%d) res: %d to [%s]\n", pid, fds[0], read_res, result);
-	// waitpid(pid, NULL, 0);
-	ft_bzero(fds, 4 * sizeof(int));
-	read_res = read(fds[0], &result, 5);
-	ft_printf("read from pid(%d) via fd(%d) res: %d to [%s]\n", pid, fds[0], read_res, result);
+static int	str_key_cmp(t_kv_key k1, t_kv_key k2)
+{
+	return (ft_strncmp((const char *)k1, (const char *)k2, 10));
+}
+
+static void	*print_str(void *s)
+{
+	if (s == NULL)
+		s = "[NULL]";
+	ft_putstr_fd(s, 1);
+	return (NULL);
 }
 
 int	main(int argc, char **argv, char **env)
 {
+	char	*key1;
+	char	*key2;
+	char	*val1;
+	char	*val2;
+	t_kv	*store;
+	char	**act_keys;
+
+	key1 = "key34";
+	key2 = "key2";
+	val1 = "42";
+	val2 = "34";
+	ft_printf("joa geh\n");
+	store = ft_kv_init(str_key_cmp);
+	ft_kv_put(store, key1, val1);
+	ft_kv_put(store, key2, val2);
+	act_keys = (char **)ft_kv_keys(store);
+	ft_arr_each((arr_t)act_keys, print_str);
+	ft_arr_each((arr_t)act_keys, print_str);
 	(void)argc;
 	(void)argv;
 	(void)env;
-	ft_pipe_x();
 	return (0);
 }
