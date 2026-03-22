@@ -47,3 +47,19 @@ T(pop_2)
 	cr_assert_null(ft_lst_pop(&lst));
 	cr_assert_null(ft_lst_pop(&lst));
 }
+
+T(push_pop)
+{
+	int		i;
+	int		b;
+	t_list	*lst;
+
+	b = 42;
+	lst = ft_lstnew(&i);
+	ft_lst_push(&lst, &b);
+	cr_assert_eq(&b, ft_lst_pop(&lst));
+	cr_assert_eq(&i, ft_lst_pop(&lst));
+	cr_assert_null(ft_lst_pop(&lst));
+	cr_assert_null(ft_lst_pop(&lst));
+	cr_assert_null(ft_lst_pop(&lst));
+}
