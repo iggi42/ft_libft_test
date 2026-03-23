@@ -13,7 +13,7 @@
 #include "../include/ftt.h"
 #include <criterion/criterion.h>
 #include <stdio.h>
-#include <libft.h>
+#include <libft_char.h>
 
 #define EOF_Test(target) Test(libft_ctype, target) { cr_assert(target(EOF) == 0); }
 

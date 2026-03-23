@@ -13,7 +13,7 @@
 #include "../include/ftt.h"
 #include <criterion/assert.h>
 #include <criterion/criterion.h>
-#include <libft.h>
+#include <libft_str.h>
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -266,8 +266,9 @@ T(strnstr_man_page)
 T(substr_easy)
 {
 	const char	*base = "12345678";
-	char	*result = ft_substr(base, 0, 3);
+	char		*result;
 
+	result = ft_substr(base, 0, 3);
 	cr_assert_eq(strncmp("123", result, 4), 0, "\"%s\" is not \"123\"", result);
 	cr_assert_eq(strlen(result), 3);
 	free(result);
@@ -276,8 +277,9 @@ T(substr_easy)
 T(substr_size_too_large)
 {
 	const char	*base = "1";
-	char	*result = ft_substr(base, 0, 3);
+	char		*result;
 
+	result = ft_substr(base, 0, 3);
 	cr_assert_eq(strncmp("1", result, 3), 0, "\"%s\" is not \"1\"", result);
 	cr_assert_eq(strlen(result), 1);
 	free(result);
@@ -286,8 +288,9 @@ T(substr_size_too_large)
 T(substr_start_too_large)
 {
 	const char	*base = "";
-	char	*result = ft_substr(base, 1, 3);
+	char		*result;
 
+	result = ft_substr(base, 1, 3);
 	cr_assert_eq(strncmp("", result, 3), 0, "\"%s\" is not an empty string",
 		result);
 	cr_assert_eq(strlen(result), 0);
@@ -297,8 +300,9 @@ T(substr_start_too_large)
 T(substr_start_too_large2)
 {
 	const char	*base = "zxy abc efg ";
-	char	*result = ft_substr(base, 13, 3);
+	char		*result;
 
+	result = ft_substr(base, 13, 3);
 	cr_assert_eq(strncmp("", result, 3), 0, "\"%s\" is not an empty string",
 		result);
 	cr_assert_eq(strlen(result), 0);
@@ -308,8 +312,9 @@ T(substr_start_too_large2)
 T(substr_middle)
 {
 	const char	*base = "zxy abc efg ";
-	char	*result = ft_substr(base, 4, 3);
+	char		*result;
 
+	result = ft_substr(base, 4, 3);
 	cr_assert_eq(strncmp("abc", result, 3), 0, "\"%s\" is not an empty string",
 		result);
 	cr_assert_eq(strlen(result), 3);
@@ -319,8 +324,9 @@ T(substr_middle)
 T(substr_last_char)
 {
 	const char	*base = "abc1";
-	char	*result = ft_substr(base, 3, 3);
+	char		*result;
 
+	result = ft_substr(base, 3, 3);
 	cr_assert_eq(strncmp("1", result, 3), 0, "\"%s\" the last char of \"%s\" ",
 		result, base);
 	cr_assert_eq(strlen(result), 1);
@@ -337,7 +343,8 @@ T(strjoin_easy)
 
 T(strjoin_empty)
 {
-	char *s;
+	char	*s;
+
 	cr_assert_str_eq(s = ft_strjoin("", ""), "");
 	free(s);
 }
@@ -346,7 +353,7 @@ T(strjoin_smoll)
 {
 	char	*s;
 
-	cr_assert_str_eq(s = ft_strjoin("a", "") , "a");
+	cr_assert_str_eq(s = ft_strjoin("a", ""), "a");
 	free(s);
 }
 
@@ -354,7 +361,8 @@ T(strtrim_easy)
 {
 	char	*s;
 
-	cr_assert_str_eq(s = ft_strtrim("0Eins1Zwei2Drei3Fier4","0123456789"),"Eins1Zwei2Drei3Fier");
+	cr_assert_str_eq(s = ft_strtrim("0Eins1Zwei2Drei3Fier4", "0123456789"),
+		"Eins1Zwei2Drei3Fier");
 	free(s);
 }
 
@@ -362,8 +370,9 @@ T(strtrim_empty)
 {
 	const char	*set = "0123456789";
 	const char	*s1 = "";
-	char	*result = ft_strtrim(s1, set);
+	char		*result;
 
+	result = ft_strtrim(s1, set);
 	cr_assert_str_eq(result, "");
 	free(result);
 }
@@ -372,8 +381,9 @@ T(strtrim_empty2)
 {
 	const char	*set = "0123456789";
 	const char	*s1 = "jkjk";
-	char	*result = ft_strtrim(s1, set);
+	char		*result;
 
+	result = ft_strtrim(s1, set);
 	cr_assert_str_eq("jkjk", result);
 	free(result);
 }
@@ -393,7 +403,7 @@ T(split_easy)
 	cr_assert_str_eq(result[4], "89");
 	result_length = ftt_array_lenth((const void *)result, sizeof(char *));
 	cr_assert_eq(result_length, 5, "actual length %i\n", (int)result_length);
-	ftt_array_free((const void **) result);
+	ftt_array_free((const void **)result);
 }
 
 // ATOI and friends

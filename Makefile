@@ -1,6 +1,6 @@
 CC = cc
-CFLAGS += -Wall -Wextra -Werror -I../libft/inc/ 
-export FT_EXTRA_CFLAGS += -g -v
+CFLAGS += -Wall -Wextra -Werror -I./libft/inc/
+export FT_EXTRA_CFLAGS += -g
 # -fprofile-arcs -ftest-coverage -O1
 HEADER += ./include/ftt.h
 NAME = libft_test
@@ -14,7 +14,7 @@ C_SRC += ftt_lib_fmt.c
 C_SRC += ftt_lib_iol.c
 C_SRC += ftt_lib_toa.c
 C_SRC += ftt_lib_kv.c
-C_SRC += ftt_lib_arr.c
+# C_SRC += ftt_lib_arr.c
 C_SRC += ftt_lib_lst.c
 C_SRC += ftt_lib_io.c
 # C_SRC += ftt_lib_os.c

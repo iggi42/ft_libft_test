@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 #ifndef FTT_LIB_H
 # define FTT_LIB_H
-# include <libft.h>
 # include <stdlib.h>
 
 void	*ftt_malloc(size_t s);
