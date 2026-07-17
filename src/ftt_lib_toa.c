@@ -14,6 +14,7 @@
 #include "libft_locale.h"
 #include "libft_str.h"
 #include "libft_toa.h"
+#include "libft_str.h"
 #include <criterion/assert.h>
 #include <criterion/criterion.h>
 #include <limits.h>
@@ -157,6 +158,16 @@ T(itoa_INT_MAX)
 	free(s);
 	free(s_int_max);
 }
+
+
+T(itoa_int_min)
+{
+	char	*s;
+
+	cr_assert_str_eq(s = ft_itoa(INT_MIN), "-2147483648");
+	free(s);
+}
+
 
 T(btoa_FF)
 {

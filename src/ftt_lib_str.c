@@ -486,3 +486,206 @@ T(atoi_bs_afterwards)
 	s = "-00123";
 	cr_assert_eq(-123, ft_atoi(s));
 }
+
+static int is_sixseven(int c)
+{
+	return ((char) c) == '6' || ((char) c) == '7';
+}
+
+T(strnxt_easy)
+{
+	char *s;
+	s = "012385778";
+
+	cr_assert_eq(ft_strnxt(s, is_sixseven), s + 6);
+}
+
+T(strnxt_empty_str)
+{
+	char *s;
+	s = "";
+
+	cr_assert_eq(ft_strnxt(s, is_sixseven), NULL);
+}
+
+T(strnxt_not_found)
+{
+	char *s;
+	s = "82398djkljdaf";
+
+	cr_assert_eq(ft_strnxt(s, is_sixseven), NULL);
+}
+
+
+T(str2l_0)
+{
+	char *s = "0";
+	long result;
+	cr_assert_eq(ft_str2l(s, &result), ft_strlen(s));
+	cr_assert_eq(result, 0,"result is %ld instead of 0", result );
+}
+
+
+T(str2l_neg0)
+{
+	char *s = "-0";
+	long result;
+	cr_assert_eq(ft_str2l(s, &result), ft_strlen(s));
+	cr_assert_eq(result, 0,"result is %ld instead of 0", result );
+}
+
+T(str2l_42_invalid_str)
+{
+	char *s = "jkl351hhjadf";
+	long result;
+	cr_assert_eq(ft_str2l(s, &result), 0);
+}
+
+T(str2l_42_extra_str)
+{
+	char *s = "42jkl";
+	long result;
+	cr_assert_eq(ft_str2l(s, &result), ft_strlen(s) - 3);
+	cr_assert_eq(result, 42,"result is %ld instead of 42", result );
+}
+
+T(str2l_max_long)
+{
+	char *s = "9223372036854775807";
+	long result;
+	size_t read = ft_str2l(s, &result);
+
+	cr_assert_eq(read, ft_strlen(s), "only read %ld chars instead of %ld\n", read, ft_strlen(s));
+	cr_assert_eq(result, LONG_MAX,"result is %ld instead of long max (%ld)", result, LONG_MAX );
+}
+
+T(str2l_max_long_1overflow)
+{
+	char *s = "9223372036854775808";
+	long result;
+	size_t read = ft_str2l(s, &result);
+
+	cr_assert_eq(read, ft_strlen(s), "only read %ld chars instead of %ld\n", read, ft_strlen(s));
+}
+
+T(str2l_min_long)
+{
+    char *s = "-9223372036854775808";
+
+	long result;
+	cr_assert_eq(ft_str2l(s, &result), ft_strlen(s));
+	cr_assert_eq(result, LONG_MIN, "result is %ld instead of long min (%ld)", result, LONG_MIN);
+}
+
+
+T(str2l_min_long_1underflow)
+{
+    char *s = "-9223372036854775809";
+
+	long result;
+	cr_assert_eq(ft_str2l(s, &result), 0);
+}
+
+T(str2l_2xmin_long_neg_overflow_test)
+{
+	char *s = "-18446744073709551616";
+	long result;
+	cr_assert_eq(ft_str2l(s, &result), 0);
+}
+
+T(str2l_2xmax_long_pos_overflow_test)
+{
+	char *s = "18446744073709551616";
+	long result;
+	cr_assert_eq(ft_str2l(s, &result), 0);
+}
+
+T(str2d_min_long)
+{
+    char *s = "-9223372036854775808/1";
+
+	double result;
+	cr_assert_eq(ft_str2d(s, &result), ft_strlen(s));
+	cr_assert_eq(result, (double) LONG_MIN, "result is %f instead of %f", result, (double) LONG_MIN);
+}
+
+T(str2d_min_ns)
+{
+    char *s = "-9223372036854775808/-9223372036854775808";
+
+	double result;
+	cr_assert_eq(ft_str2d(s, &result), ft_strlen(s));
+	cr_assert_eq(result, 1.0, "result is %f instead of %f", result, 1.0);
+}
+
+T(str2d_42)
+{
+    char *s = "420/10";
+
+	double result;
+	cr_assert_eq(ft_str2d(s, &result), ft_strlen(s));
+	cr_assert_eq(result, 42.0, "result is %f instead of (%f)", result, 42.0);
+}
+
+T(str2d_1337)
+{
+    char *s = "-jk420.10";
+
+	double result;
+	cr_assert_eq(ft_str2d(s, &result), false);
+}
+
+T(str2d_1337_2)
+{
+    char *s = "420.10";
+
+	double result;
+	cr_assert_eq(ft_str2d(s, &result), false);
+}
+
+T(str_eq_emp)
+{
+	cr_assert(ft_str_eq("", ""), "two empty strings should be equal");
+}
+
+T(str_eq_joa)
+{
+	cr_assert(ft_str_eq("joa", "joa"), "two \"joa\" strings should be equal");
+}
+
+
+T(str_eq_joa0)
+{
+	cr_assert(ft_str_eq("joa\0joa", "joa"), "two \"joa\" strings should be equal");
+}
+
+T(str_eq_joan)
+{
+	cr_assert_not(ft_str_eq("joan", "joa"), "\"joan\" != \"joa\"");
+}
+
+
+T(str_sw_empty_empty)
+{
+	cr_assert(ft_str_sw("", ""), "\"\" starts with \"\"");
+}
+
+T(str_sw_joajjlk_joa)
+{
+	cr_assert(ft_str_sw("joajlkjlk", "joa"));
+}
+
+T(str_sw_joa_joa)
+{
+	cr_assert(ft_str_sw("joa", "joa"));
+}
+
+T(str_sw_n_jjoa_joa)
+{
+	cr_assert_not(ft_str_sw("jjoa", "joa"));
+}
+
+T(str_sw_n_jjoa_jjjjoa)
+{
+	cr_assert_not(ft_str_sw("jjoa", "jjjoa"));
+}

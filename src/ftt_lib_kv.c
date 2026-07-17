@@ -10,17 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft_arr_t.h"
+#include "libft_lst_kv.h"
 #include <criterion/criterion.h>
 #include <libft_kv.h>
 #include <libft_arr.h>
 #include <libft_str.h>
+#include <libft_mem.h>
 #include <libft_io.h>
 
 #define T(a) Test(libft_kv, a)
 
+#define ig_kv ((void)(t_kv_pair *p) ft_void)
+
 int str_key_cmp(t_kv_key k1, t_kv_key k2)
 {
 	return ft_strncmp((const char *)k1, (const char *) k2, 10);
+}
+
+void free_store(t_kv *s)
+{
+	ft_kv_free(s, (void *)(t_kv_pair *) ft_void);
 }
 
 T(init_put_get)
@@ -30,7 +39,7 @@ T(init_put_get)
 	t_kv *store = ft_kv_init(str_key_cmp);
 	ft_kv_put(store, key, val);
 	cr_assert_eq(ft_kv_get(store, key), val);
-	ft_kv_free(store);
+	free_store(store);
 }
 
 T(put_overwrites)
@@ -42,7 +51,7 @@ T(put_overwrites)
 	ft_kv_put(store, key, val1);
 	ft_kv_put(store, key, val2);
 	cr_assert_eq(ft_kv_get(store, key), val2);
-	ft_kv_free(store);
+	free_store(store);
 }
 
 T(put_overwrites_delete_once)
@@ -54,10 +63,13 @@ T(put_overwrites_delete_once)
 	ft_kv_put(store, key, val1);
 	ft_kv_put(store, key, val2);
 	cr_assert_eq(ft_kv_get(store, key), val2);
-    t_kv_value poped = ft_kv_pop(store, key);
-	cr_assert_eq(poped, val2);
+    t_kv_pair *poped = ft_kv_pop(store, key);
+	cr_assert_not_null(poped);
+	cr_assert_eq(poped->val, val2);
+	cr_assert_eq(poped->key, key);
 	cr_assert_null(ft_kv_get(store, key));
-	ft_kv_free(store);
+	cr_assert_null(ft_kv_get(store, key));
+	free_store(store);
 }
 
 T(two_keys)
@@ -71,7 +83,7 @@ T(two_keys)
 	ft_kv_put(store, key2, val2);
 	cr_assert_eq(ft_kv_get(store, key1), val1);
 	cr_assert_eq(ft_kv_get(store, key2), val2);
-	ft_kv_free(store);
+	free_store(store);
 }
 
 T(key_not_found)
@@ -82,7 +94,7 @@ T(key_not_found)
 	t_kv *store = ft_kv_init(str_key_cmp);
 	ft_kv_put(store, key1, val1);
 	cr_assert_null(ft_kv_get(store, key2));
-	ft_kv_free(store);
+	free_store(store);
 }
 
 T(list_keys)
@@ -104,6 +116,6 @@ T(list_keys)
         cr_assert_eq(act_keys[i], exp_keys[i]);
 		i++;
 	}
-	ft_kv_free(store);
+	free_store(store);
 }
 

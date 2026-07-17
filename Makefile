@@ -1,6 +1,6 @@
 CC = cc
-CFLAGS += -Wall -Wextra -Werror -I$(LIBFT_DIR)/inc/
 export FT_EXTRA_CFLAGS += -g
+CFLAGS += -Wall -Wextra -Werror -I$(LIBFT_DIR)/inc/ $(FT_EXTRA_CFLAGS)
 # -fprofile-arcs -ftest-coverage -O1
 HEADER += ./include/ftt.h
 NAME = libft_test

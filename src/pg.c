@@ -44,7 +44,7 @@ static int	str_key_cmp(t_kv_key k1, t_kv_key k2)
 	return (ft_strncmp((const char *)k1, (const char *)k2, 10));
 }
 
-static void	*print_str(void *s)
+void	*print_str(void *s)
 {
 	if (s == NULL)
 		s = "[NULL]";
@@ -54,26 +54,16 @@ static void	*print_str(void *s)
 
 int	main(int argc, char **argv, char **env)
 {
-	char	*key1;
-	char	*key2;
-	char	*val1;
-	char	*val2;
-	t_kv	*store;
-	char	**act_keys;
-
-	key1 = "key34";
-	key2 = "key2";
-	val1 = "42";
-	val2 = "34";
-	ft_printf("joa geh\n");
-	store = ft_kv_init(str_key_cmp);
-	ft_kv_put(store, key1, val1);
-	ft_kv_put(store, key2, val2);
-	act_keys = (char **)ft_kv_keys(store);
-	ft_arr_each((arr_t)act_keys, print_str);
-	ft_arr_each((arr_t)act_keys, print_str);
 	(void)argc;
 	(void)argv;
 	(void)env;
+
+    char *key = "key";
+	char *val = "--42-- ";
+	t_kv *store = ft_kv_init(str_key_cmp);
+	ft_kv_put(store, key, val);
+	ft_printf("return [%s]\n", ft_kv_get(store, key), val);
+	ft_kv_free(store);
+
 	return (0);
 }
