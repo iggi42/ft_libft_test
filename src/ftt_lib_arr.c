@@ -9,6 +9,7 @@
 /*   Updated: 2025/10/08 14:26:56 by fkruger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft_arr_t.h"
 #include <criterion/criterion.h>
 #include <libft_arr.h>
 #include <libft_io.h>
@@ -36,11 +37,10 @@ T(arr_len_3)
 	cr_assert_eq(ft_arr_len((t_arr) arr), 3);
 }
 
-static void *quad(void *p)
+static void quad(void *p)
 {
 	int *i = p;
 	*i = *i + *i;
-	return NULL;
 }
 
 T(arr_each)
@@ -53,7 +53,7 @@ T(arr_each)
 	cr_assert_eq(i[2], 6);
 }
 
-static void *add(void *acc, void *el)
+static void *add(void *acc, t_arr_el el)
 {
 	*(int *) acc += *(int *) el;
 	return acc;

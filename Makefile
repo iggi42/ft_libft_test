@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS += -Wall -Wextra -Werror -I./libft/inc/
+CFLAGS += -Wall -Wextra -Werror -I$(LIBFT_DIR)/inc/
 export FT_EXTRA_CFLAGS += -g
 # -fprofile-arcs -ftest-coverage -O1
 HEADER += ./include/ftt.h
@@ -52,7 +52,7 @@ $(BIN_DIR)/pg: src/ftt_utils.c src/pg.c $(LIBFT)
 	$(CC) $(CFLAGS) src/ftt_utils.c src/pg.c -O1 -g -I$(LIBFT_DIR) -lcriterion -lbsd -o $@ $(LIBFT)
 
 test: bin/$(NAME)
-	./bin/$(NAME)
+	./bin/$(NAME) --timeout 30
 
 ride: bin/pg
 	$(FUNCHECK) bin/pg

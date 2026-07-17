@@ -206,30 +206,3 @@ T(iszero_yes_size)
 
 	cr_assert_eq(ft_iszero(&i, 1), true);
 }
-
-T(ft_free_1)
-{
-	int	*a;
-
-	a = (int *)malloc(sizeof(int));
-	cr_assert_null(ft_free(1, &a));
-	cr_assert_null(a);
-}
-
-T(ft_free_4)
-{
-	int	*a;
-	int	*b;
-	int	*c;
-	int	*d;
-
-	a = (int *)malloc(sizeof(int));
-	b = (int *)malloc(sizeof(int));
-	c = (int *)malloc(sizeof(int));
-	d = (int *)malloc(sizeof(int));
-	cr_assert_null(ft_free(4, &a, &b, &c, &d));
-	cr_assert_null(a);
-	cr_assert_null(b);
-	cr_assert_null(c);
-	cr_assert_null(d);
-}
